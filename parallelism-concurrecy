@@ -1,4 +1,7 @@
 The diffrencent of concurrency and parallesim
 并发和并行的区别
 
+并发：同一个处理器同时处理多个任务，逻辑上同时进行，效率提升相对不大。
+并行：多个处理器同时处理多个任务，物理上同时进行，效力提升更大。 
+
 
