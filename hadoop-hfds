@@ -83,15 +83,20 @@ NameNode节点故障，DataNode节点故障，网络partition
 
 数据组织
   -- 数据块
+  写一次，多次读。典型块大小为128MB
 
   -- replication管道
-
-
+   Client ----> OneDN ----> SecondDN ----> ThirdDN
+                  |           |              |
+               Local File   Local File     Local File
+      
 可访问性
+ API（Java API/REST API）方式，CLI方式，HTTP浏览器方式，NFS网关方式挂载文件系统到本地磁盘
 
 回收空间
-
-
+  每一个用户都有自己的垃圾目录（/user/<username>/.Trash）
+  配置了回收站，删除文件不是立即删除，而是把文件移动到垃圾目录
+  
 --------
 Hadoop 机架感知
 https://hadoop.apache.org/docs/stable/hadoop-project-dist/hadoop-common/RackAwareness.html
@@ -101,7 +106,7 @@ https://hadoop.apache.org/docs/stable/hadoop-project-dist/hadoop-hdfs/ArchivalSt
 
 NameNode HA的实现方法
 NFS方法，
-https://hadoop.apache.org/docs/stable/hadoop-project-dist/hadoop-hdfs/HDFSHighAvailabilityWithNFS.html
+<a>https://hadoop.apache.org/docs/stable/hadoop-project-dist/hadoop-hdfs/HDFSHighAvailabilityWithNFS.html</a>
 
 Journal方式
 https://hadoop.apache.org/docs/stable/hadoop-project-dist/hadoop-hdfs/HDFSHighAvailabilityWithQJM.html
