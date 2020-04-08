@@ -15,8 +15,38 @@ HDFS 运行在普通商用服务器中
 5.移动计算比移动数据更高效，本地化读取数据
 6.方便在不同的平台中间迁移
 
-NameNode和DataNode 
+NameNode和DataNode  / Clients
 
+采用Master/Slave的主从架构
+NameNode 存储Metadata(文件名称，目录，replication)
+NameNode 执行Namespace的操作（打开文件，关闭文件，删除文件，重命名文件和目录，数据块分配到DataNode中 ）
+DataNode 响应来自客户端对文件的读和写请求，汇报数据块，创建数据块，删除数据块，根据NameNode的replication操作
+用户数据绝不流经NameNode节点
+
+文件系统的Namespace
+  HDFS支持用户配额和访问许可，不支持硬连接和软连接
+  
+  
+ 
+
+大数据
+
+数据复制
+--复制位置的选择
+--复制选择
+--安全模式
+
+元数据的持久化
+
+沟通协议
+
+健壮性
+
+数据组织
+
+可访问性
+
+回收空间
 
 
 NameNode HA的实现方法
