@@ -25,16 +25,26 @@ DataNode 响应来自客户端对文件的读和写请求，汇报数据块，�
 
 文件系统的Namespace
   HDFS支持用户配额和访问许可，不支持硬连接和软连接
-  
-  
- 
-
-大数据
+  应用程序可以指定一个文件的replication个数，这些信息被存储在NameNode中
 
 数据复制
+/users/sameerp/data/part-01,r:2,{2,4,5},...
+一个文件的复制因子可以在创建的时候指定，也可以在之后更改
+Namenode 周期性接收来自DataNode的心跳和汇报的块数据（DataNode节点有效的全部数据块）
+
 --复制位置的选择
---复制选择
+replication的放置决定了HDFS的可靠性和性能，优化replication是区别与其他分布式文件系统的关键点
+同一机架下各机器的网路带宽好于不同机架下机器间的网络带宽
+最好的选择是replication放置在同一机架上，但是为了增加可靠性通常会把一个replication放置到不同的机架上。
+数据的放置策略要在数据可靠性和读性能之间作出妥协
+
+--数据读取选择
+ 读取请求的DataNode节点靠近Reader
+ 多数据中心下，优先选择本数据中心的数据块
+
 --安全模式
+ 在刚开始启动的时候系统进入安全模式，在安全模式下数据块的replication被禁止
+ 数据块检测具有最小数据块后再加上30秒可以离开安全模式，此后不够replication个数据的数据文件开始拷贝复制数据块使之满足replication个数。
 
 元数据的持久化
 
@@ -48,6 +58,13 @@ DataNode 响应来自客户端对文件的读和写请求，汇报数据块，�
 
 回收空间
 
+
+--------
+Hadoop 机架感知
+https://hadoop.apache.org/docs/stable/hadoop-project-dist/hadoop-common/RackAwareness.html
+
+存储类型和存储策略
+https://hadoop.apache.org/docs/stable/hadoop-project-dist/hadoop-hdfs/ArchivalStorage.html
 
 NameNode HA的实现方法
 
