@@ -47,12 +47,45 @@ replication的放置决定了HDFS的可靠性和性能，优化replication是区
  数据块检测具有最小数据块后再加上30秒可以离开安全模式，此后不够replication个数据的数据文件开始拷贝复制数据块使之满足replication个数。
 
 元数据的持久化
+Editlog文件记录对文件的每次操作（事务日志）
+FsImage 存储在本地文件系统中，存储了namespace，文件系统属性，文件到数据块的映射
+namespace的快照和文件块映射关系被存储到内存中
+dfs.namenode.checkpoint.period checkpoint间隔时间单位秒
+dfs.namenode.checkpoint.txns 事务条数
+
+checkping process:
+reference：https://lihuimintu.github.io/2019/09/20/HDFS-HA-checkpoint/
 
 沟通协议
+ 一切协议都基于TCP/IP协议
+ DataNodeProtocol / ClientProtcol  这些协议都封装到RPC调用中
 
 健壮性
+NameNode节点故障，DataNode节点故障，网络partition
+ -- 磁盘失效，心跳，re-replication 
+   每一个DataNode会周期性的发送心跳给Namenode节点
+   DataNode节点的故障导致partition低于预期的值，Namenode节点会对这些数据进行处理re-partition
+   
+ -- 平衡集群
+   data-rebalance
+ -- 数据完整性
+   网络故障，磁盘故障，存储设备故障，软件bug导致数据块故障。 checksum校验数据库是否发生故障。
+   客户端获取数据块数据的时候也会校验数据是否正确，未通过校验的数据重新从另一个数据节点获取数据。
+   
+ -- 元数据磁盘故障
+   采用HA方式避免元数据磁盘故障
+
+ -- 快照
+ https://hadoop.apache.org/docs/stable/hadoop-project-dist/hadoop-hdfs/HdfsSnapshots.html
+ 可以在一个目录上设置快照，快照不允许嵌套。
+
+ 
 
 数据组织
+  -- 数据块
+
+  -- replication管道
+
 
 可访问性
 
@@ -67,5 +100,18 @@ https://hadoop.apache.org/docs/stable/hadoop-project-dist/hadoop-common/RackAwar
 https://hadoop.apache.org/docs/stable/hadoop-project-dist/hadoop-hdfs/ArchivalStorage.html
 
 NameNode HA的实现方法
+NFS方法，
+https://hadoop.apache.org/docs/stable/hadoop-project-dist/hadoop-hdfs/HDFSHighAvailabilityWithNFS.html
+
+Journal方式
+https://hadoop.apache.org/docs/stable/hadoop-project-dist/hadoop-hdfs/HDFSHighAvailabilityWithQJM.html
+
+
+
+NameNode HA的实现方法
+
+NameNode 脑裂
+
+
 
 
