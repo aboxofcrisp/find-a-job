@@ -104,9 +104,19 @@ https://hadoop.apache.org/docs/stable/hadoop-project-dist/hadoop-common/RackAwar
 存储类型和存储策略
 https://hadoop.apache.org/docs/stable/hadoop-project-dist/hadoop-hdfs/ArchivalStorage.html
 
+HA方法
+  非HA情况下
+  1.机器崩溃导致服务不可用
+  2.NameNode节点的软件或硬件升级导致长时间的停工检查
+  
 NameNode HA的实现方法
-NFS方法，
-<a>https://hadoop.apache.org/docs/stable/hadoop-project-dist/hadoop-hdfs/HDFSHighAvailabilityWithNFS.html</a>
+NFS方法  https://hadoop.apache.org/docs/stable/hadoop-project-dist/hadoop-hdfs/HDFSHighAvailabilityWithNFS.html
+使用NFS方式实现HA
+ Active / StandBy
+ 采用隔离方法（fencing method）防止脑裂
+ 
+
+ 
 
 Journal方式
 https://hadoop.apache.org/docs/stable/hadoop-project-dist/hadoop-hdfs/HDFSHighAvailabilityWithQJM.html
