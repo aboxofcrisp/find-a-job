@@ -1,1 +1,39 @@
 
+1.重载 override和重写 overwrite的区别
+ 重载 override 在一个类中方法名相同，参数不同，类型不同，顺序不同的方法
+ 重写 子类重写父类中的同名方法,重写是为了在子类中重新改写父类中的同名方法。
+ 
+2.String类和StringBuilder类、StringBuffer类的区别， String类为什么是不可变的
+ 因为String类使用了final的字符数据来存储数据所以String类是不可变的。
+ StringBuffer类是实现了同步是线程安全的
+ StringBuilder类在JDK1.5之后出现是非线程安全的。
+ 参考知识：常量池 方法区
+3.自动拆箱、装箱
+ 自动装箱：自动将基本类型用它们的引用类型包装起来
+ 自动拆箱：自动将基本类型的引用类型转化为基本数据类型
+ 
+ 在循环中生成临时对象会产生性能问题
+ 
+ 4. == 和 equals 
+  == 是比较两个对象的地址是否相等，基本对象比较的是值是否相等
+  equals 是比较两个对象的内容是否相等
+  
+ 5. final关键字
+  final修饰的变量一旦赋值就不能进行修改
+  final修饰的类不允许继承
+  final修饰的方法不允许修改
+  
+ 6.Object类常见方法 wait,notify,notifyAll,toString,equal,hashCode
+ 
+ 7.
+   
+   
+  
+  
+ 
+
+
+
+
+ 
+ 
