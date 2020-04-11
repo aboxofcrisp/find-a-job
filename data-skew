@@ -1,5 +1,6 @@
 1.什么是数据倾斜
- 相同Key的数据发送到一个节点处理，导致数据处理时间过长或这内存溢出无法处理。
+  在shuffle阶段相同Key的数据发送到一个节点处理，导致数据处理时间过长或这内存溢出无法处理。
+  原因是数据分布的不均匀
 
 2.如何发现数据倾斜
   a.通过监控发现某些任务执行时间和其他任务执行时间对比悬殊
@@ -9,3 +10,10 @@
 3.数据倾斜的种类
 
 4.解决数据倾斜的方法
+ a.提前对每个表中的key数据进行聚合减少shuffle的数据量
+ b.将reduce join 转化为map join，通过broadcast方法将RDD进行广播这样每个Executor都有一份RDD数据
+ c.针对key添加随机数
+ 
+
+spark  shuffle类算子 join groupByKey  countByKey reduceByKey
+
