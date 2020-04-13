@@ -58,6 +58,25 @@
   内存共享      内存独立不共享                线程之间可以实现内存共享
   资源消耗      消耗更多资源，进程终止释放字眼，进程由操作系统维护                  消耗更少资源，线程终止不是放资源，线程由程序员维护
           
+          
+          
+ 16.CAS和AQS
+   CAS Compare and Swap
+   AQS AbstractQueuedSynchronizer
+  
+ 17.集合类
+    Map HashTable、HashMap、TreeMap、LinkedHashMap
+    Set HashSet、TreeSet、LinkedHashSet
+    List ArrayList、LinkedList、Vectot、Stack
+    Queue  ArrayBlockingQueue、LinkedBlockingQueue、PriorityBlockingQueue
+    
+ 18.Java 锁
+ https://tech.meituan.com/2018/11/15/java-lock.html
+ 
+ 19.Java 并发编程 JUC
+ 
+ 20.
+    
  
  
  
