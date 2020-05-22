@@ -75,6 +75,67 @@
  
  19.Java 并发编程 JUC
  
+ 锁的类型和概念
+ 
+ 公平锁 ： 先来先服务，不允许加塞儿
+ 非公平锁 ： 允许加塞儿，默认为非公平锁，吞吐量比公平锁大。
+ Lock lock = new ReentrantLock(Boolean fair); 
+ // ReadWriteLock 默认为非公平锁
+ 
+ Synchronized 是一种非公平锁（？）
+ 
+ 
+ 
+ 可重入锁
+ 自旋锁
+ 递归锁
+ 独占锁
+ 共享锁
+ 
+ 
+CAS介绍
+1.什么是CAS
+CAS（CompareAndSwap 比较并交换）原子操作无锁 
+CAS（V，E，N） V表示要更新变量的值，E表示预期值，N表示新值。仅当 V值等于E值时，才会将V的值设为N，如果V值和E值不同，
+则说明已经有其他线程做两个更新，则当前线程则什么都不做。最后，CAS 返回当前V的真实值。
+CAS 操作时抱着乐观的态度进行的，它总是认为自己可以成功完成操作。 CAS(100,100,200) 返回200 // CAS(150,100,200)返回150
+
+//通过当前值和预期值的比较发现其他线程对数据的干扰，而不使用锁，避免出现死锁，没有线程调度和锁竞争的开销，比锁的方式性能更优。
+
+问题：
+1.比较和交换两个操作如何做到原子操作
+2.V这个值是如何获取的呢
+
+// 示例说明在多线程环境下变量未同步出现线程间的竞争
+
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
+public class LockTest {
+
+    static  int  totalNumber = 0;
+    public static void main(String[] args){
+        ExecutorService executorService = Executors.newFixedThreadPool(100);
+        for(int x = 0;x<1000000;x+=1) {
+            executorService.submit(new Runnable() {
+                @Override
+                public void run() {
+                    for(int i=0;i<100;i++){
+                        totalNumber +=1;
+                    }
+                }
+            });
+        }
+
+        executorService.shutdown();
+        System.out.println("totalNumber = "+totalNumber);
+
+    }
+
+}
+
+
+
  20.
     
  
