@@ -1,0 +1,6 @@
+1.什么是 Memory-Mapped File
+
+
+
+
+Java Memory-Mapped File所使用的内存分配在物理内存而不是JVM堆内存，且分配在OS内核。
